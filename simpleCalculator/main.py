@@ -1,8 +1,12 @@
 #Gabriel Crozier, Simple Calculator
 
-firstNum = str(input('What is the first number you want in this equation:\n'))
-operator = input('What do you want to do to these numbers:\n')
-secNum = str(input('What is the second number you want in this equation:\n'))
+firstNum = str(input('What is the first number you want in these equations:\n'))
+secNum = str(input('What is the second number you want in these equations:\n'))
 
-
-print(firstNum,operator,secNum,'=',str(eval(firstNum+operator+secNum)))
+print(firstNum + ' + ' + secNum + ' = ' + str(int(firstNum)+int(secNum)))
+print(firstNum + ' - ' + secNum + ' = ' + str(int(firstNum)-int(secNum)))
+print(firstNum + ' * ' + secNum + ' = ' + str(int(firstNum)*int(secNum)))
+print(firstNum + ' / ' + secNum + ' = ' + str(int(firstNum)/int(secNum)))
+print(firstNum + ' ** ' + secNum + ' = ' + str(int(firstNum)**int(secNum)))
+print(firstNum + ' % ' + secNum + ' = ' + str(int(firstNum)%int(secNum)))
+print(firstNum + ' // ' + secNum + ' = ' + str(int(firstNum)//int(secNum)))
