@@ -12,5 +12,5 @@ studentA -= 1
 staffA -= 3
 guestA = 2 * studentA - 15
 staffA += 1
-print(f"There are {staffA} staff attending, {studentA} students being awarded, {guestA} guests attending. {guestPTable} people can sit at each table!\n")
-print((staffA+studentA+guestA)/guestPTable)
+print(f"There are now {staffA} staff attending, {studentA} students being awarded, {guestA} guests attending. {guestPTable} people can sit at each table!\n")
+print(int((staffA+studentA+guestA)/guestPTable-0.001)+1)
