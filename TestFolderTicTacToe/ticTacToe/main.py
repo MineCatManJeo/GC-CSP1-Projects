@@ -31,7 +31,7 @@ def comp_rand_place(board,xo):
         if board[compNum] == '#':
             board[compNum] = xo[1]
             break
-def check_win(board):
+def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE row 1 has 33% empty and 66% x or smth then if the ratio is 100% it does the thing? Also if not I can try something like this for possdible other thing ALSO don't work on this project WEDNESDAY in class work on UML
     for i in range(3):
         if board[i] == board[i+3] and board[i] == board[i+6] and board[i] != '#':
             print(f'{board[i].capitalize()} won the game at column {i+1}')
