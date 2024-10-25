@@ -1,9 +1,9 @@
 # Gabriel Crozier, Test tic tac toe (Cause I felt like it)
 import random as r
 board = [
-    '#','#','#',
-    '#','#','#',
-    '#','#','#'
+    ['#','#','#'],
+    ['#','#','#'],
+    ['#','#','#']
 ]
 xo = ['x']
 xo.insert(r.choice([0,1]),'o')
@@ -11,7 +11,7 @@ xo.insert(r.choice([0,1]),'o')
 def show_board(board,turn):
     print(f'{turn}')
     for i in range(3):
-        print(board[0+(3*i)],board[1+(3*i)],board[2+(3*i)])
+        print(board[i][0],board[i][1],board[i][2])
     print('')
 def user_place(board,xo):
     while True:
@@ -33,6 +33,8 @@ def comp_rand_place(board,xo):
             board[compNum] = xo[1]
             show_board(board,'\nComputers Placement:')
             break
+def check_percent(board):
+    values = 'xo#'
 def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE row 1 has 33% empty and 66% x or smth then if the ratio is 100% it does the thing? Also if not I can try something like this for possdible other thing ALSO don't work on this project WEDNESDAY in class work on UML
     for i in range(3):
         if board[i] == board[i+3] and board[i] == board[i+6] and board[i] != '#':
@@ -51,7 +53,7 @@ def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE 
     if '#' not in board:
         print('It\'s a draw!')
         return True
-
+"""
 if xo[0] == 'x':
     user_place(board,xo)
 while True:
@@ -61,4 +63,5 @@ while True:
     user_place(board,xo)
     if check_win(board):
         break
+"""
 show_board(board,'\nFinal Board:')
