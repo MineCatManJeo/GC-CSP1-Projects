@@ -1,3 +1,4 @@
+# Gabriel Crozier, List Proficiency test, shopping list
 def add(itemList):
     item = input('What would you like to add to your list?: ')
     item = item.split()
