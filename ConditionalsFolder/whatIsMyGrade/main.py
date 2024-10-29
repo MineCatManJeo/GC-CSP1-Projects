@@ -4,6 +4,13 @@ def append(classes,grades):
     classTemp = []
     classTemp.append(input('What is your class?: '))
     classTemp.append(float(input('What is your grade percent in that class?: ')))
+    print(classTemp)
+    if classTemp[-1] < 60:
+        print('You FAILED ):<')
+    elif classTemp[-1] >= 60 and classTemp[-1] < 90:
+        print('You have low grades... Are you even trying here!!! ):<')
+    else:
+        print('Showoff ):<')
     for grade in grades:
         if classTemp[-1] >= grade[1] and classTemp[-1] <= grade[2]:
             classTemp.append(grade[0])
@@ -16,4 +23,5 @@ classes = []
 
 for i in range(numClasses):
      append(classes,grades)
-print(classes)
+for class1 in classes:
+    print(f'Your grade percent in {class1[0]} is {class1[1]}, so you have a {class1[2]}!')
