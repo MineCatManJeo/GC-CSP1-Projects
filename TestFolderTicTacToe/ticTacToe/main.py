@@ -21,39 +21,41 @@ def user_place(board,xo):
             userNum = 8
         elif userNum < 0:
             userNum = 0
-        if board[userNum] == '#':
-            board[userNum] = xo[0]
+        if board[userNum//3][userNum%3] == '#':
+            board[userNum//3][userNum%3] = xo[0]
             break
         else:
             print('That wasn\'t a number 1-9 that could fit in an empty space, try again...')
 def comp_rand_place(board,xo):
     while True:
         compNum = r.randint(0,8)
-        if board[compNum] == '#':
-            board[compNum] = xo[1]
+        if board[compNum//3][compNum%3] == '#':
+            board[compNum//3]{compNum%3} = xo[1]
             show_board(board,'\nComputers Placement:')
             break
 def check_percent(board):
     values = 'xo#'
 def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE row 1 has 33% empty and 66% x or smth then if the ratio is 100% it does the thing? Also if not I can try something like this for possdible other thing ALSO don't work on this project WEDNESDAY in class work on UML
     for i in range(3):
-        if board[i] == board[i+3] and board[i] == board[i+6] and board[i] != '#':
-            print(f'{board[i].capitalize()} won the game at column {i+1}')
+        if board[0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] != '#':
+            print(f'{board[0][i].capitalize()} won the game at column {i+1}')
             return True
-    for i in range(0,9,3):
-        if board[i] == board[i+1] and board[i] == board[i+2] and board[i] != '#':
-            print(f'{board[i].capitalize()} won the game at row {int((i/3)+1)}')
+    for i in range(3):
+        if board[i][0] == board[i][1] and board[i][0] == board[i][2] and board[i][0] != '#':
+            print(f'{board[i][0].capitalize()} won the game at row {i+1}')
             return True
-    if board[0] == board[4] and board[0] == board[8] and board[4] != '#':
-        print(f'{board[4].capitalize()} won the game with a diagonal from the top left')
+    if board[0][0] == board[1][1] and board[0][0] == board[2][2] and board[1][1] != '#':
+        print(f'{board[0][0].capitalize()} won the game with a diagonal from the top left')
         return True
-    if board[2] == board[4] and board[2] == board[6] and board[4] != '#':
-        print(f'{board[4].capitalize()} won the game with a diagonal from the top right')
+    if board[0][2] == board[1][1] and board[0][2] == board[2][0] and board[1][1] != '#':
+        print(f'{board[1][1].capitalize()} won the game with a diagonal from the top right')
         return True
-    if '#' not in board:
+    for row in board:
+        if '#' in row:
+            return False
         print('It\'s a draw!')
         return True
-"""
+
 if xo[0] == 'x':
     user_place(board,xo)
 while True:
@@ -63,5 +65,4 @@ while True:
     user_place(board,xo)
     if check_win(board):
         break
-"""
 show_board(board,'\nFinal Board:')
