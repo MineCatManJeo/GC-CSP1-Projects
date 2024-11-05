@@ -26,18 +26,36 @@ def user_place(board,xo):
             break
         else:
             print('That wasn\'t a number 1-9 that could fit in an empty space, try again...')
-def comp_rand_place(board,xo):
+def comp_rand_place(board,xo): # Add the computer smartness here
     while True:
         compNum = r.randint(0,8)
         if board[compNum//3][compNum%3] == '#':
-            board[compNum//3]{compNum%3} = xo[1]
+            board[compNum//3][compNum%3] = xo[1]
             show_board(board,'\nComputers Placement:')
             break
-def check_percent(board):
-    values = 'xo#'
+def find_percent(board,value):
+    rows = []
+    columns = []
+    indexes = []
+    percent = []
+    for row in board:
+        rows.append(round(row.count(value)/0.03))
+        try: indexes.append(row.index(value))
+        except: indexes.append(-1)
+    for col in range(3):
+        column = ''
+        for row in range(3):
+            column += board[row][col]
+        columns.append(round(column.count(value)/0.03))
+        try: indexes.append(column.index(value))
+        except: indexes.append(-1)
+    percent.append(rows)
+    percent.append(columns)
+    percent.append(indexes)
+    return percent
 def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE row 1 has 33% empty and 66% x or smth then if the ratio is 100% it does the thing? Also if not I can try something like this for possdible other thing ALSO don't work on this project WEDNESDAY in class work on UML
     for i in range(3):
-        if board[0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] != '#':
+        if board[0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] != '#': # maybe try using % instead of this stuff this could be redundent
             print(f'{board[0][i].capitalize()} won the game at column {i+1}')
             return True
     for i in range(3):
@@ -53,8 +71,8 @@ def check_win(board): # NOTES MAYBE YOU CAN MAKE A % FOR EACH ROW / COLUMN LIKE 
     for row in board:
         if '#' in row:
             return False
-        print('It\'s a draw!')
-        return True
+    print('It\'s a draw!')
+    return True
 
 if xo[0] == 'x':
     user_place(board,xo)
