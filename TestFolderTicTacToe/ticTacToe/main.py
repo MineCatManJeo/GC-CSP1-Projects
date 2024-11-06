@@ -2,7 +2,7 @@
 import random as r
 board = [
     ['#','#','#'],
-    ['#','#','#'],
+    ['#','#','#'], # Add alignment to things later
     ['#','#','#']
 ]
 xo = ['x']
@@ -14,9 +14,14 @@ def show_board(board,turn):
         print(board[i][0],board[i][1],board[i][2])
     print('')
 def user_place(board,xo):
+    show_board(board,'\nYour turn:')
     while True:
-        show_board(board,'\nYour turn:')
-        userNum = int(input(f'Input a number 1-9 (1 being the top left of board) to place your {xo[0].capitalize()}: '))-1
+        userNum = input(f'Input a number 1-9 (1 being the top left of board) to place your {xo[0].capitalize()}: ')
+        try: 
+            userNum = int(userNum)-1
+        except:
+            show_board(board,'\nInvalid input. Try again:')
+            continue
         if userNum > 8:
             userNum = 8
         elif userNum < 0:
@@ -25,15 +30,28 @@ def user_place(board,xo):
             board[userNum//3][userNum%3] = xo[0]
             break
         else:
-            print('That wasn\'t a number 1-9 that could fit in an empty space, try again...')
-def comp_rand_place(board,xo): # Add the computer smartness here
+            show_board(board,'\nInvalid placement location. Try again:')
+def comp_rand_place(board,xo): # simple & non random
+    indexValueOff = True
+    percent1 = find_percent(board,xo[1]) # Gets percent of computer sybol (x o) for each row / column
+    percentHash = find_percent(board,'#') # Gest percent of the # sybol for row & column also first index of it in the row column
+    for i in range(2): # loops 1 for row and 1 for column
+        for j in range(3): # 3 rows and 3 columns
+            if percent1[i][j] + percentHash[i][j] == 100 and percent1[i][j] == 67: # checks if computer has a 67% to 33% match
+                inVal = percentHash[2][j+(3*i)] # indexes based off of row
+                if i == 0: indexValue = inVal+(3*j) # changes to 0-8 for rows
+                elif i == 1: indexValue = ((inVal*2)+j)+inVal # changes ro 0-8 for columns
+                indexValueOff = False # breaks and says index has been found
+                break
     while True:
-        compNum = r.randint(0,8)
+        if indexValueOff: compNum = r.randint(0,8) # random num (simple)
+        elif not indexValueOff: 
+            compNum = indexValue # non random always wins if 2 in row / column
         if board[compNum//3][compNum%3] == '#':
             board[compNum//3][compNum%3] = xo[1]
             show_board(board,'\nComputers Placement:')
             break
-def find_percent(board,value):
+def find_percent(board,value): # NEED TO ADD FUNCTION FOR DIAGONAL
     rows = []
     columns = []
     indexes = []
