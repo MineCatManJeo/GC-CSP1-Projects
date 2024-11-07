@@ -1,4 +1,3 @@
-# This is my test file
 def find_percent(board,value): # NEED TO ADD FUNCTION FOR DIAGONAL
     rows = []
     columns = []
@@ -20,10 +19,11 @@ def find_percent(board,value): # NEED TO ADD FUNCTION FOR DIAGONAL
         diagonal = ''
         for row in range(3):
             diagonal += board[row][(row+dig)-(dig*2*(row+dig))] # needs to make the second loop time -1 and not times 0
-        print(diagonal)
         diagonals.append(round(diagonal.count(value)/0.03))
         try: indexes.append(diagonal.index(value))
         except: indexes.append(-1)
+    diagonals.append(0)
+    indexes.append(-1)
     percent.append(rows)
     percent.append(columns)
     percent.append(diagonals)
@@ -36,4 +36,5 @@ board = [
     ['o','x','#']
 ]
 
-print(find_percent(board,'#'))
+#print(find_percent(board,'#'))
+for i in range(0): print('hi')
