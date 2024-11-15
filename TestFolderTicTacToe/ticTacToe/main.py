@@ -103,10 +103,13 @@ def check_win(board):
         return False
     print('It\'s a draw!')
     return True
-
-difficulty = input('What difficulty would you like 1-3: ') # Need to make this a while loop that allows for stats and other things
-try: difficulty = int(difficulty)
-except: print('Try again buddy...')
+while True:
+    difficulty = input('\nWhat difficulty would you like 1-3: ') # Need to make this a while loop that allows for stats and other things
+    try: 
+        difficulty = int(difficulty) -1
+        difficulty = difficulty % 3 + 1
+        break
+    except: print('Try again buddy...')
 if xo[0] == 'x':
     user_place(board,xo)
 while True:
