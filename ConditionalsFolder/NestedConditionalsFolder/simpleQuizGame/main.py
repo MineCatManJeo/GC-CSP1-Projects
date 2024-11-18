@@ -1,5 +1,5 @@
 # Gabriel Crozier, Nested conditionals simple quiz game
-#import time as t
+import time as t
 quzQutins = [
     # Easy Difficulty
     'What drops when you break a grass block with your fist?||A. Grass\nB. Dirt\nC. Grass Block\nD. Gravel||B',
@@ -8,8 +8,8 @@ quzQutins = [
     'What would you NORMALLY press in order to attack a mob?||A. Right Click\nB. Left Click\nC. E\nD. F||B',
     'What do you use to trade with villagers?||A. Rubies\nB. Diamonds\nC. Bread\nD. Emeralds||D',
     # Normal Difficulty
-    'What do you need to control a saddled pig in Minecraft?||A. Warped Funcgus on a Stick\nB. Potato on a Stick\nC. Carrot on a Stick\nD. Raw Porkchop||C',
-    'What is the effect you get when you kill a pillager captain?||A. Raiders Incoming\nB. Raid\nC.Bad Omen\nD. Vile||C',
+    'What do you need to control a saddled pig in Minecraft?||A. Warped Fungus on a Stick\nB. Potato on a Stick\nC. Carrot on a Stick\nD. Raw Porkchop||C',
+    'What is the effect you get when you kill a pillager captain?||A. Raiders Incoming\nB. Raid\nC. Bad Omen\nD. Vile||C',
     'Where do you get blaze rods?||A. The Nether Fortress\nB. Bastion\nC. Sky Islands\nD. The Nether Forges||A',
     'Where does the end portal spawn in Minecraft?||A. The Sky Islands\nB. Stronghold\nC. Below the Void\nD. The Weathered Ruins||B',
     'How do you tame a cat in Minecraft?||A. You rush the cat with fish\nB. You walk slowly to the cat and feed it cooked fish\nC. You slowly walk up to the cat and feed it raw fish\nD. You drop fish on the ground and wait for the cat to eat it||C',
@@ -21,11 +21,61 @@ quzQutins = [
     'What is the arbalistic advancement in Minecraft?||A. Trick question, there is no achievement called arbalistic\nB. It is an advancement where you kill 500 mobs with a bow\nC. It is where you shoot and kill 5 different mobs with one peircing arrow of a crossbow\nD. It is when you find a rare diamond crossbow inside of a pillager dungeon.||C'
 ]
 
-#def quiz():
-#    print('\nWelcome to my epic most amazing quiz about Minecraft!!!!\n')
-#    #time = t.time()
-#    diff = 1
-#    for i in range(5):
-#        print(quzQutins[i+diff*5])
-# WHERE STUPI SYNTAX ASHDS
+def quiz():
+    print('\nWelcome to my epic most amazing quiz about Minecraft!!!!\n')
+    time = t.time()
+    while True:
+        diff = input('Choose a difficulty 1-3: ')
+        try: 
+            diff = int(diff) - 1
+            break
+        except: print('\nTry Again...\n')
+    corAns = 0
+    for i in range(5):
+        print(f'\n{quzQutins[i+diff*5].split("||")[0]}')
+        answer = input(f'\n{quzQutins[i+diff*5].split("||")[1]}\n\n Answer Here: ').lower()
+        if answer[0] in 'abcd':
+            if answer[0] == 'a':
+                if quzQutins[i+diff*5].split('||')[2].lower() == 'a':
+                    print('\nCorrect\n')
+                    corAns += 1
+                    if diff != 2:
+                        diff += 1
+                        print('Difficulty Increase!\n')
+                    else: print('')
+                    continue
+            elif answer[0] == 'b':
+                if quzQutins[i+diff*5].split('||')[2].lower() == 'b':
+                    print('\nCorrect\n')
+                    corAns += 1
+                    if diff != 2:
+                        diff += 1
+                        print('Difficulty Increase!\n')
+                    else: print('')
+                    continue
+            elif answer[0] == 'c':
+                if quzQutins[i+diff*5].split('||')[2].lower() == 'c':
+                    print('\nCorrect\n')
+                    corAns += 1
+                    if diff != 2:
+                        diff += 1
+                        print('Difficulty Increase!\n')
+                    else: print('')
+                    continue
+            else:
+                if quzQutins[i+diff*5].split('||')[2].lower() == 'd':
+                    print('\nCorrect\n')
+                    corAns += 1
+                    if diff != 2:
+                        diff += 1
+                        print('Difficulty Increase!')
+                    continue
+            print('\nIncorrect')
+            if diff != 0:
+                diff -= 1
+                print('Difficulty Decrease!')
+    time = t.time() - time
+    if round(time//60) == 0: print(f'It took you {round(time%60)} seconds to get {corAns} out of 5 questions correct!')
+    else: print(f'It took you {round(time//60)} minutes and {round(time%60)} seconds to get {corAns} out of 5 questions correct!')
+quiz()
 
