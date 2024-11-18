@@ -10,7 +10,7 @@ person = input("\nChoose a race:\n" + '\n'.join(races) + '\n')
 personClass = input("\nChoose a class:\n" + '\n'.join(classes) + '\n')
 personName = input('\nWhat would you like to call yourself: ')
 
-print(f'Your name is {personName.capitalize}')
+print(f'Your name is {personName.capitalize()}')
 for i in range(len(races)):
     if races[i] == person:
         playerStatsRace = stats[i]
