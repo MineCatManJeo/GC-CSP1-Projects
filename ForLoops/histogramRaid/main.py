@@ -1,15 +1,20 @@
 # Gabriel Crozier, Histogram raid
 numList = []
-num = 0
-while num <= -1:
-    num += 1
+numCount1 = 0
+while numCount1 <= 20:
+    numCount1 += 1
     try: numList.append(int(input('Choose a number: ')))
     except: print('Not a Number')
-    if num >= 7:
+    if numCount1 >= 6:
         try:
-            if not bool(input('Would you like to continue adding numbers (True / False): ')):
+            boole = input('Would you like to continue adding numbers (True / False): ').lower()
+            if boole == 'false':
+                boole = 0
+            if not bool(boole):
                 break
         except: print('Error No Bool')
 
-print(numList)
-print(bool('True'))
+numCount2 = 1
+for bar in numList:
+    print(f'{numCount2}. {bar*"*"}')
+    numCount2 += 1
