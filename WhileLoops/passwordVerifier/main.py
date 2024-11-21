@@ -15,4 +15,4 @@ while True:
         print('Password needs to have special characters.')
         continue
     break
-print('Broken')
+print(f'Your password: {password}, has been verified.')
