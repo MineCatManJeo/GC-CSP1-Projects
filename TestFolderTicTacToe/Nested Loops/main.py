@@ -2,24 +2,32 @@
 # I LOVE MAKING THINGS COMPLEX FOR NO REASON :D
 grid = [
 
-['A', 'B', 'C', 'A', 'D'],
+['A', 'B', 'T', 'A', 'D'],
 
-['C', 'A', 'B', 'D', 'E'],
+['N', 'K', 'C', 'D', 'B'],
 
-['A', 'D', 'C', 'E', 'A'],
+['B', 'A', 'D', 'D', 'G'],
 
-['B', 'A', 'C', 'A', 'D'],
+['N', 'F', 'C', 'C', 'J'],
 
-['D', 'C', 'B', 'E', 'A'] ]
+['B', 'B', 'C', 'K', 'D'],
+
+['C', 'A', 'B', 'G', 'E'],
+
+['A', 'G', 'C', 'E', 'A'],
+
+['B', 'K', 'J', 'A', 'D'],
+
+['D', 'C', 'B', 'E', 'G'] ]
 
 ltrTrue = [[],[]]
 
 for row in grid:
     for ltr in row:
-        if not ltr in ltrTrue:
-            ltrTrue[0].append([ltr])
-            ltrTrue[1].append([1])
+        if ltr in ltrTrue[0]:
+            ltrTrue[1][ltrTrue[0].index(ltr)] += 1
         else:
-            ltrTrue[ltrTrue.index(ltr)+1] += 1
+            ltrTrue[0].append(ltr)
+            ltrTrue[1].append(1)
 for i in range(len(ltrTrue[0])):
-    print(ltrTrue[0][i])
+    print(f'{ltrTrue[0][i]}:{ltrTrue[1][i]}')
