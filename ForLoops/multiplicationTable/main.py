@@ -1,5 +1,5 @@
 # Gabriel Crozier, Multiplication Table
-num = int(input('NUM: '))
+num = int(input('Hello User!\nInput a number to create a multiplication table!\n1 = normal 12x12 multiplication table\n2 = 2,4,6,8... ect\nInput your number here!: '))
 numList = list(range(num,num*12+num,num))
 numbList = []
 multiList = []
