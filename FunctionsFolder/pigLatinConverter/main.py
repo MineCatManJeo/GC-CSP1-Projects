@@ -36,5 +36,15 @@ def pigLatinConv(words):
     sentence1 = ' '.join(sentence).lower() # Combines the word to a sentence
     return(sentence1) # returns the translated sentence
 
-print('\n')
-print(pigLatinConv(input('Write a sentence!:\n'))) # the function
+while True:
+    print('\n')
+    print(pigLatinConv(input('Write a sentence!:\n'))) # the function
+    try: 
+        if int(input('Input 1 to continue converting!: ')) == 1:
+            continue
+        else:
+            print('Input was not 1, Breaking now')
+            break
+    except: 
+        print('Input was not 1, Breaking now')
+        break
