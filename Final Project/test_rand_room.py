@@ -49,6 +49,7 @@ def action(rom_cords, cur_locat, preset):
     # Exits (Room entrances / exits) (You see a door to the right)
     doorPlace = []
     doorPlace1 = []
+    print(cur_locat)
     for pos1 in rom_cords[cur_locat[0]][cur_locat[1]][1][0]:
         for pos2 in preset[0]:
             if pos1.upper() == pos2[-1]:
@@ -67,39 +68,39 @@ def action(rom_cords, cur_locat, preset):
 4.
 ----> """)
     try: actionOps = int(actionOps)
-    except: print('User did not input a number, try again not coded yet!')
+    except: 
+        print('User did not input a number, try again not coded yet!')
+        return True, True
     # Combat
     # Item
     # Search
     # Move
     if actionOps == 1:
-        breakLoop, move = movement(preset,doorPlace1)
-    return breakLoop, move
+        breakLoop, move, cur_locat = movement(preset, doorPlace1, rom_cords, cur_locat)
+    return breakLoop, move, cur_locat
 # Movement
-def movement(preset,doorPlace1):
+def movement(preset,doorPlace1, rom_cords, cur_locat):
     print('You can: ')
     for move_option in preset[1]:
         for door in doorPlace1:
             if move_option[-1].lower() == door:
                 print(f'Move {move_option[0:-1]} ({move_option[-1]})')
-    move = input('Input movement option (u:up, d:down, l:left, r:right): ')
+    move = input('Input movement option (u:up, d:down, l:left, r:right): ').lower()
     print('\033c')
     print('You moved [insert move here]')
-    if not move == cords[current[0]][current[1]][1]:
+    if not move == rom_cords[cur_locat[0]][cur_locat[1]][1][1]:
         if move == 'u':
-            current[1] += 1
+            cur_locat[1] += 1
         elif move == 'd':
-            current[1] -= 1
+            cur_locat[1] -= 1
         elif move == 'l':
-            current[0] -= 1
+            cur_locat[0] -= 1
         elif move == 'r':
-            current[0] += 1
-        elif move == 's':
-            return True, move
-        else:
-            return False, move
+            cur_locat[0] += 1
+        return False, move, cur_locat
     else:
-        print('You hit a wall!')
+        print('Not a valid movement option!')
+        return True, move, cur_locat
 
 
 # In Game text preset
@@ -114,13 +115,14 @@ preRoom = 0
 current = [0,0]
 cords = {}
 cords, roomNum = assign_room(cords, current, roomNum)
-action(cords, current, Presets)
 while True:
+    action_vars = action(cords, current, Presets)
     preRoom = current
-    breakLoop, move = action(cords, current, Presets)
-    if not breakLoop:
+    print(action_vars)
+    if action_vars[0]:
         break
-    cords, roomNum = assign_room(cords, current, roomNum, move, preRoom)
+    current = action_vars[2]
+    cords, roomNum = assign_room(cords, current, roomNum, action_vars[1], preRoom)
 print(cords)
 # SO FAR! Creates a new generated room inside of a dictionary each time you explore!, Also gives the room a name and a random value
 # need to make more changable, do this by using functions and stuff
