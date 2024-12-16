@@ -123,3 +123,5 @@ while True:
     cords, roomNum = assign_room(cords, current, roomNum, move, preRoom)
 print(cords)
 # SO FAR! Creates a new generated room inside of a dictionary each time you explore!, Also gives the room a name and a random value
+# need to make more changable, do this by using functions and stuff
+# Also needs to have more complex wall system that works with more than one wall.
