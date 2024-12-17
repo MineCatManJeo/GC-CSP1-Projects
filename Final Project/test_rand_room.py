@@ -48,7 +48,7 @@ def add_walls(pre_room, move):
     return all4Walls
 # Gives everything you own in the inventory
 def check_inv(inv):
-    print('\033c')
+    print('\033c')  # MAKE SURE TO ALLOW FUNCIONALLITY TO MULTIPLE DATA OF THE SAME ITEM name print description of items you type in as well
     print('Inventory:')
     for slot in inv:
         print(f'{slot} x{inv[slot]["amount"]}')
