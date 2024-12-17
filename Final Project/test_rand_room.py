@@ -46,6 +46,7 @@ def add_walls(pre_room, move):
     all4Walls.append(doorList)
     all4Walls.append(wallList)
     return all4Walls
+# Gives everything you own in the inventory
 def check_inv(inv):
     print('\033c')
     print('Inventory:')
@@ -88,7 +89,7 @@ def action(rom_cords, cur_locat, preset, inv):
     # Move
     if actionOps == 1:
         return ['inv_check']
-    if actionOps == 3:
+    if actionOps == 4:
         return ['move',doorPlace1]
     if actionOps == 5:
         return ['break']
