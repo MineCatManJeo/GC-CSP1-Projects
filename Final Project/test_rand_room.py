@@ -49,7 +49,6 @@ def add_walls(pre_room, move):
 def check_inv(inv):
     print('\033c')
     print('Inventory:')
-    print(inv)
     for slot in inv:
         print(f'{slot} x{inv[slot]["amount"]}')
 # Print Your actions
@@ -77,6 +76,7 @@ def action(rom_cords, cur_locat, preset, inv):
 2. Check Stats
 3. Combat needs to be first before anything else
 4. Search / move / other options
+5. Exit Game
 ----> """)
     try: actionOps = int(actionOps)
     except: 
@@ -87,12 +87,14 @@ def action(rom_cords, cur_locat, preset, inv):
     # Search
     # Move
     if actionOps == 1:
-        check_inv(inv)
+        return ['inv_check']
     if actionOps == 3:
-        breakLoop, move, cur_locat = movement(preset, doorPlace1, rom_cords, cur_locat)
-    return breakLoop, move, cur_locat
+        return ['move',doorPlace1]
+    if actionOps == 5:
+        return ['break']
 # Movement
 def movement(preset,doorPlace1, rom_cords, cur_locat):
+    print('\033c')
     print('You can: ')
     for move_option in preset[1]:
         for door in doorPlace1:
@@ -160,6 +162,7 @@ Presets = preGameAssignment()
 print('\033c')
 roomNum = 0
 preRoom = 0
+breakLoop = False
 current = [0,0]
 cords = {}
 inv = {}
@@ -173,12 +176,24 @@ inv = item(inv, 'add', 'Small Health Potion', 3, {'healing':25})
 cords, roomNum = assign_room(cords, current, roomNum)
 
 while True:
-    action_vars = action(cords, current, Presets, inv) # Instead, make return values like 'move', 'check_inv' and then if is move then get these values
-    preRoom = current
-    if action_vars[0]:
+    print('\033c')
+    action_vars = action(cords, current, Presets, inv)
+    if action_vars[0] == 'move':
+        breakLoop, move, current = movement(Presets, action_vars[1], cords, current)
+        preRoom = current
+        if breakLoop:
+            break
+        cords, roomNum = assign_room(cords, current, roomNum, move, preRoom)
+        input('\nReady to continue?')
+    elif action_vars[0] == 'inv_check':
+        check_inv(inv)
+        input('\nReady to continue?')
+    elif action_vars[0] == 'break':
         break
-    current = action_vars[2]
-    cords, roomNum = assign_room(cords, current, roomNum, action_vars[1], preRoom)
 print(cords)
 # Almost finished movement sysstem, doesnt work very well with other systems but thats a later me problem
 # Inventory system started, not even close to done
+
+
+# IMPORTANT I was able to walk through a will in room 0 possibly because of a previous room error or smth
+# also im noticing the 2nd room i enter sometimes has only 3 possible walls/doors, because of how i coded it it wont breal, but it might be worth looking into if i have the time
